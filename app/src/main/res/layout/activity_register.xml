@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="100dp"
+            android:paddingBottom="@dimen/_200sdp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/create_account" />
+
+            <EditText
+                android:id="@+id/edtName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_44sdp"
+                android:layout_marginTop="60dp"
+                android:background="@drawable/bg_view"
+                android:drawableStart="@drawable/icon_user"
+                android:drawablePadding="10dp"
+                android:hint="Name"
+                android:singleLine="true"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textColorHint="#b8b8b8" />
+
+
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_44sdp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_view"
+                android:drawableStart="@drawable/icon_user"
+                android:drawablePadding="10dp"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="#b8b8b8" />
+
+
+            <EditText
+                android:id="@+id/edtContactNo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_44sdp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_view"
+                android:drawableStart="@drawable/icon_user"
+                android:drawablePadding="10dp"
+                android:hint="phone no"
+                android:singleLine="true"
+                android:inputType="phone"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textColorHint="#b8b8b8" />
+
+
+            <EditText
+                android:id="@+id/edtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_44sdp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_view"
+                android:drawableStart="@drawable/icon_password"
+                android:drawablePadding="10dp"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="#b8b8b8" />
+
+
+            <EditText
+                android:id="@+id/edtConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_44sdp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_view"
+                android:drawableStart="@drawable/icon_password"
+                android:drawablePadding="10dp"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="#b8b8b8" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="-18.5sp"
+                    android:text="Create"
+                    android:textColor="#000000"
+                    android:textSize="25sp"
+                    android:textStyle="normal" />
+
+                <include layout="@layout/layout_circle" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/opensans_regular"
+                android:lineSpacingExtra="-7.3sp"
+                android:text="Or create account using social media"
+                android:textColor="#000000"
+                android:textSize="13.8sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bg_view"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/vector_smart_object" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:text="Continue with Google"
+                    android:textColor="#757575"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/fbloginButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="40dp" />
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/bg_view"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_fb" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:text="Continue with Google"
+                    android:textColor="#757575"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

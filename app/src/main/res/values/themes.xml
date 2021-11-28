@@ -1,0 +1,54 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.ToYourStore" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.ToYourStore.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.ToYourStore.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.ToYourStore.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="YourCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">#cccccc</item>
+    </style>
+
+    <style name="GrayEditTextStyle" parent="@android:style/Widget.EditText">
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="hintTextColor">@color/black</item>
+        <item name="drawableTint">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <style name="GrayTextTextStyle" parent="@android:style/Widget.TextView">
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="hintTextColor">@color/black</item>
+        <item name="drawableTint">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+</resources>

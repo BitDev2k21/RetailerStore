@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_8sdp">
+
+    <TextView
+        android:id="@+id/txtProductName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_semibold"
+        android:lineSpacingExtra="7.5sp"
+        android:text="1. Parle-G (100g)"
+        android:textColor="#49536f"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/txtQnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="@dimen/_8sdp"
+        android:fontFamily="@font/opensans_semibold"
+        android:lineSpacingExtra="7.5sp"
+        android:text="30"
+        android:textColor="#49536f"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="normal" />
+
+
+    <TextView
+        android:id="@+id/txtPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/_8sdp"
+        android:fontFamily="@font/opensans_semibold"
+        android:lineSpacingExtra="7.5sp"
+        android:text="₹150:00"
+        android:textColor="#49536f"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="normal" />
+</RelativeLayout>
+

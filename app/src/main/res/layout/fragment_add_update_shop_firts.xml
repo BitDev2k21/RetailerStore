@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.ShopAddUpdateFragmentFirstTime">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/green" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:elevation="100dp"
+        android:paddingBottom="30dp"
+        app:cardCornerRadius="14dp"
+        app:strokeColor="#E2E2E2"
+        app:strokeWidth="1dp">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollNest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlTop"
+            android:layout_margin="20dp"
+            android:overScrollMode="never">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:drawableLeft="@drawable/icon_shop"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:lineSpacingExtra="-5.3sp"
+                    android:text="Shop Details"
+                    android:textColor="@color/black"
+                    android:textSize="11.3sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_2sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:background="#c5c5c5" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="-5.3sp"
+                    android:text="Shop Name"
+                    android:textColor="#757575"
+                    android:textSize="11.3sp"
+                    android:textStyle="normal" />
+
+                <EditText
+                    android:id="@+id/edtShop"
+                    style="@style/GrayEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_36sdp"
+                    android:background="@drawable/bg_view_gray"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="-5.3sp"
+                    android:text="Address"
+                    android:textColor="#757575"
+                    android:textSize="11.3sp"
+                    android:textStyle="normal" />
+
+                <EditText
+                    android:id="@+id/edtAddress"
+                    style="@style/GrayEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:gravity="start|top"
+                    android:layout_height="@dimen/_60sdp"
+                    android:background="@drawable/bg_view_gray"
+                    android:inputType="textMultiLine"
+                    android:maxLines="3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:inputType="number"
+                    android:lineSpacingExtra="-5.3sp"
+                    android:text="GST Number"
+                    android:textColor="#757575"
+                    android:textSize="11.3sp"
+                    android:textStyle="normal" />
+
+                <EditText
+                    android:id="@+id/edtGstNumber"
+                    style="@style/GrayEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_36sdp"
+                    android:background="@drawable/bg_view_gray"
+                    android:inputType="numberDecimal"
+                    android:maxLines="1" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="-5.3sp"
+                    android:text="State"
+                    android:textColor="#757575"
+                    android:textSize="11.3sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtState"
+                    style="@style/GrayTextTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_36sdp"
+                    android:background="@drawable/bg_view_gray"
+                    android:drawableRight="@drawable/icon_arrow_drop_down"
+                    android:singleLine="true" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="-5.3sp"
+                    android:text="City"
+                    android:textColor="#757575"
+                    android:textSize="11.3sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtCity"
+                    style="@style/GrayTextTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_36sdp"
+                    android:background="@drawable/bg_view_gray"
+                    android:drawableRight="@drawable/icon_arrow_drop_down"
+                    android:singleLine="true" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:inputType="number"
+                    android:lineSpacingExtra="-5.3sp"
+                    android:text="Pin Code"
+                    android:textColor="#757575"
+                    android:textSize="11.3sp"
+                    android:textStyle="normal" />
+
+                <EditText
+                    android:id="@+id/edtPinCode"
+                    style="@style/GrayEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_36sdp"
+                    android:background="@drawable/bg_view_gray"
+                    android:inputType="number"
+                    android:maxLines="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="-5.3sp"
+                    android:text="Working Hours : From"
+                    android:textColor="#757575"
+                    android:textSize="11.3sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txFrom"
+                    style="@style/GrayTextTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_36sdp"
+                    android:background="@drawable/bg_view_gray"
+                    android:clickable="true"
+                    android:drawableRight="@drawable/icon_arrow_drop_down"
+                    android:singleLine="true" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="-5.3sp"
+                    android:text="Working Hours : To"
+                    android:textColor="#757575"
+                    android:textSize="11.3sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtTo"
+                    style="@style/GrayTextTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_36sdp"
+                    android:background="@drawable/bg_view_gray"
+                    android:clickable="true"
+                    android:drawableRight="@drawable/icon_arrow_drop_down"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="-5.3sp"
+                    android:text="Business Line"
+                    android:textColor="#757575"
+                    android:textSize="11.3sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtBusinessLine"
+                    style="@style/GrayTextTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_36sdp"
+                    android:background="@drawable/bg_view_gray"
+                    android:clickable="true"
+                    android:drawableRight="@drawable/icon_arrow_drop_down"
+                    android:singleLine="true" />
+
+                <include
+                    android:id="@+id/rlMulti"
+                    layout="@layout/layout_recyler_view"
+                    android:visibility="gone" />
+
+
+                <LinearLayout
+                    android:id="@+id/llSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_green_button"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:gravity="center"
+                        android:padding="14dp"
+                        android:text="SAVE"
+                        android:textColor="#ffffff"
+                        android:textSize="15sp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>

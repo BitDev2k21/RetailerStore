@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.ReviewFragment">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/green" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="60dp"
+        android:elevation="100dp"
+        android:paddingBottom="30dp"
+        app:cardCornerRadius="14dp"
+        app:strokeColor="#E2E2E2"
+        app:strokeWidth="1dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_bold"
+                    android:lineSpacingExtra="-7.8sp"
+                    android:text="Information"
+                    android:textColor="#010101"
+                    android:textSize="13.8sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_2sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:lineSpacingExtra="11.3sp"
+                        android:text="First Name"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/txtFirstName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:lineSpacingExtra="-7.8sp"
+                        android:text="Pravin Shah"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_2sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:lineSpacingExtra="11.3sp"
+                        android:text="Mobile Number:"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/txtMobileNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:lineSpacingExtra="-7.8sp"
+                        android:text="Bharat Shah"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_2sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:lineSpacingExtra="11.3sp"
+                        android:text="Shop Name:"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/txtShopName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:lineSpacingExtra="-7.8sp"
+                        android:text="+91 65478 2314"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_2sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:lineSpacingExtra="11.3sp"
+                        android:text="Address"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/txtAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:lineSpacingExtra="-7.8sp"
+                        android:text="Mahavir Sales Agancy"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_2sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:lineSpacingExtra="11.3sp"
+                        android:text="Email address:"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/txtEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:lineSpacingExtra="-7.8sp"
+                        android:text="someone@gmail.com"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_2sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:lineSpacingExtra="11.3sp"
+                        android:text="GST No.:"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/txtGstNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:lineSpacingExtra="-7.8sp"
+                        android:text="A011334AQWEC"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_2sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:lineSpacingExtra="11.3sp"
+                        android:text="State"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/txtState"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:lineSpacingExtra="-7.8sp"
+                        android:text="Gujarat"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_2sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:lineSpacingExtra="11.3sp"
+                        android:text="City"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/txtcity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:lineSpacingExtra="-7.8sp"
+                        android:text="Baroda"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_2sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:lineSpacingExtra="11.3sp"
+                        android:text="PinCode: "
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/txtPinCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:lineSpacingExtra="-7.8sp"
+                        android:text="30 Days"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_2sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:lineSpacingExtra="11.3sp"
+                        android:text="Working Hours:"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/txtWorkingHours"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:lineSpacingExtra="-7.8sp"
+                        android:text="Daily"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_2sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:lineSpacingExtra="11.3sp"
+                        android:text="Your store type:"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/txtStoreType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:lineSpacingExtra="-7.8sp"
+                        android:text="Airport Road"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_2sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:lineSpacingExtra="11.3sp"
+                        android:text="Business Line:"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/txtBusinessLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:lineSpacingExtra="-7.8sp"
+                        android:text="FMCG"
+                        android:textColor="#757575"
+                        android:textSize="11.3sp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtConfirm"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_green_button"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:gravity="center"
+                        android:padding="14dp"
+                        android:text="Save"
+                        android:textColor="#ffffff"
+                        android:textSize="15sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/txtCancel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_gray_button"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:gravity="center"
+                        android:padding="14dp"
+                        android:text="Edit"
+                        android:textColor="#ffffff"
+                        android:textSize="15sp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>

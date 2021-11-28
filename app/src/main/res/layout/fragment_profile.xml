@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.fragment.ProfileFragment"
+    >
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/green" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="40dp"
+        android:elevation="100dp"
+        android:paddingBottom="30dp"
+        app:cardCornerRadius="20dp"
+        app:strokeColor="#E2E2E2"
+        app:strokeWidth="1dp">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:orientation="vertical">
+
+
+              <FrameLayout
+                  android:visibility="gone"
+                  android:layout_width="120dp"
+                  android:layout_height="120dp"
+                  android:layout_gravity="center"
+                  >
+                  <de.hdodenhof.circleimageview.CircleImageView
+                      android:layout_width="100dp"
+                      android:layout_height="100dp"
+                      android:src="@drawable/icon_profile"
+                      app:civ_border_width="2dp"
+                      app:civ_border_color="#FF000000"
+                      />
+
+                  <ImageView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_vertical|right"
+                      android:layout_marginRight="10dp"
+                      android:src="@drawable/icon_profile_edit"
+                      />
+               </FrameLayout>
+
+
+                <TextView
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textStyle="bold"
+                    android:textSize="13.8sp"
+                    android:textColor="#253545"
+                    android:lineSpacingExtra="-7.8sp"
+                    android:drawableLeft="@drawable/icon_profile_info"
+                    android:drawablePadding="5dp"
+                    tools:text="Personal Details"
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="-5.3sp"
+                    android:textColor="#757575"
+                    android:textSize="11.3sp"
+                    android:layout_marginTop="20dp"
+                    android:textStyle="normal"
+                    android:text="Name" />
+
+                <EditText
+                    android:id="@+id/edtUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_view_gray"
+                    android:drawablePadding="10dp"
+                    android:padding="12dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="-5.3sp"
+                    android:textColor="#757575"
+                    android:textSize="11.3sp"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="normal"
+                    android:text="Contact Number" />
+
+                <EditText
+                    android:id="@+id/edtContactNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_view_gray"
+                    android:drawablePadding="10dp"
+                    android:padding="12dp"
+                    android:textColor="@color/black"
+                    android:singleLine="true"
+                    android:textColorHint="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="-5.3sp"
+                    android:textColor="#757575"
+                    android:textSize="11.3sp"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="normal"
+                    android:text="Email" />
+
+                <EditText
+                    android:id="@+id/edtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_view_gray"
+                    android:drawablePadding="10dp"
+                    android:padding="12dp"
+                    android:textColor="@color/black"
+                    android:singleLine="true"
+                    android:textColorHint="@color/black" />
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="-5.3sp"
+                    android:textColor="#757575"
+                    android:textSize="11.3sp"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="normal"
+                    android:text="Address" />
+
+                <EditText
+                    android:id="@+id/edtAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_view_gray"
+                    android:drawablePadding="10dp"
+                    android:padding="12dp"
+                    android:textColor="@color/black"
+                    android:singleLine="true"
+                    android:textColorHint="@color/black" />
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

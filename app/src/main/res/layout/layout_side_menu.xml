@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:background="@drawable/bg_side_menu"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rlProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/bg_view_radius"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/icon_profile" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_toLeftOf="@+id/imgArrowDown"
+            android:layout_toRightOf="@+id/imgProfile"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtSideMenuName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_regular"
+                android:lineSpacingExtra="-4sp"
+                android:text=" Jayesh Patel"
+                android:textColor="#000000"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtSideMenyType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:lineSpacingExtra="-1.5sp"
+                android:text=" Distributor"
+                android:textColor="#9b9b9b"
+                android:textSize="7.5sp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgArrowDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="4dp"
+            android:src="@drawable/icon_down_arrow" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/txtHome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/selector_side_menu"
+            android:drawableLeft="@drawable/icon_associate"
+            android:drawablePadding="14dp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="40sp"
+            android:padding="16dp"
+            android:text="@string/home"
+            android:textColor="@color/color_side_meu_text"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtBrowse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/selector_side_menu"
+            android:drawableLeft="@drawable/icon_shop"
+            android:drawablePadding="14dp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="40sp"
+            android:padding="16dp"
+            android:text="@string/browse"
+            android:textColor="@color/color_side_meu_text"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtShop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/selector_side_menu"
+            android:drawableLeft="@drawable/icon_shop"
+            android:drawablePadding="14dp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="40sp"
+            android:padding="16dp"
+            android:text="@string/shop_setails"
+            android:textColor="@color/color_side_meu_text"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtDistributors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/selector_side_menu"
+            android:drawableLeft="@drawable/icon_shop"
+            android:drawablePadding="14dp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="40sp"
+            android:padding="16dp"
+            android:text="@string/distributors_products"
+            android:textColor="@color/color_side_meu_text"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/txtAgencyDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/selector_side_menu"
+            android:drawableLeft="@drawable/icon_agency"
+            android:drawablePadding="14dp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="40sp"
+            android:padding="16dp"
+            android:text="@string/agency_details"
+            android:textColor="@color/color_side_meu_text"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtAssociteCom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/selector_side_menu"
+            android:drawableLeft="@drawable/icon_associate"
+            android:drawablePadding="14dp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="40sp"
+            android:padding="16dp"
+            android:text="@string/associated_companies"
+            android:textColor="@color/color_side_meu_text"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/txtInventry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/selector_side_menu"
+            android:drawableLeft="@drawable/icon_invetry"
+            android:drawablePadding="14dp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="40sp"
+            android:padding="16dp"
+            android:text="Inventory"
+            android:textColor="@color/color_side_meu_text"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/txtOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/selector_side_menu"
+            android:drawableLeft="@drawable/icon_order"
+            android:drawablePadding="14dp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="40sp"
+            android:padding="16dp"
+            android:text="Orders"
+            android:textColor="@color/color_side_meu_text"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/txtPastOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:background="@drawable/selector_side_menu"
+            android:drawablePadding="14dp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="40sp"
+            android:paddingLeft="@dimen/_32sdp"
+            android:paddingTop="@dimen/_16sdp"
+            android:paddingBottom="@dimen/_16sdp"
+            android:text=" - Past Orders"
+            android:textColor="@color/color_side_meu_text"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtNewOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_side_menu"
+            android:drawablePadding="14dp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="40sp"
+            android:paddingLeft="@dimen/_32sdp"
+            android:paddingTop="@dimen/_16sdp"
+            android:paddingBottom="@dimen/_16sdp"
+            android:text=" - Current Orders"
+            android:textColor="@color/color_side_meu_text"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/txtWorkForce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/selector_side_menu"
+            android:drawableLeft="@drawable/icon_associate_shop"
+            android:drawablePadding="14dp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="40sp"
+            android:padding="16dp"
+            android:text="Work Force"
+            android:textColor="@color/color_side_meu_text"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/txtLogOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/selector_side_menu"
+            android:drawableLeft="@drawable/icon_log_out"
+            android:drawablePadding="14dp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="40sp"
+            android:padding="16dp"
+            android:text="Logout"
+            android:textColor="@color/color_side_meu_text"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</LinearLayout>

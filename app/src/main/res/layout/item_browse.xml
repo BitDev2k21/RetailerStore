@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rlItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="14dp"
+        android:background="@color/white"
+        android:elevation="100dp"
+        app:cardCornerRadius="10dp"
+        app:strokeColor="#E2E2E2"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <ImageView
+                    android:id="@+id/img_product"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_weight="3"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/image_parle_ji" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtProName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:text="PARLE-G Original Gluco \nBiscuits Super Offer"
+                        android:textColor="#757575"
+                        android:textSize="12.5sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@color/gray_line_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="11.3sp"
+                    android:text="Distributor Name:"
+                    android:textColor="#49536f"
+                    android:textSize="11.3sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDistName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="11.3sp"
+                    android:textColor="#49536f"
+                    android:textSize="11.3sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="11.3sp"
+                    android:text="M.R.P. :"
+                    android:textColor="#49536f"
+                    android:textSize="11.3sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtMpr"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="11.3sp"
+                    android:textColor="#49536f"
+                    android:textSize="11.3sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="11.3sp"
+                    android:text="Buying Price: "
+                    android:textColor="#49536f"
+                    android:textSize="11.3sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtBuyingPrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="11.3sp"
+                    android:textColor="#49536f"
+                    android:textSize="11.3sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="11.3sp"
+                    android:text="Company: "
+                    android:textColor="#49536f"
+                    android:textSize="11.3sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtCompany"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="11.3sp"
+                    android:textColor="#49536f"
+                    android:textSize="11.3sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="11.3sp"
+                    android:text="Mini. Quantity: "
+                    android:textColor="#49536f"
+                    android:textSize="11.3sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtMiniQnty"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:lineSpacingExtra="11.3sp"
+                    android:textColor="#49536f"
+                    android:textSize="11.3sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtAddCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_green_button"
+                android:drawableRight="@drawable/ic_cart"
+                android:drawablePadding="@dimen/_6sdp"
+                android:fontFamily="@font/opensans_semibold"
+                android:gravity="center"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:text="Add to Cart"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>
