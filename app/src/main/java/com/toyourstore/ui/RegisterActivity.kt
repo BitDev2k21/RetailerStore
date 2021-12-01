@@ -10,12 +10,6 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.FacebookSdk
-import com.facebook.login.LoginResult
-import com.facebook.login.widget.LoginButton
 import com.google.android.gms.common.api.ApiException
 import com.toyourstore.R
 import com.toyourstore.api.ApiCallingRequest
@@ -40,8 +34,8 @@ class RegisterActivity : BaseActivity() {
     private lateinit var edtConfirmPassword: EditText
     private lateinit var edtContactNo: EditText
     private lateinit var pd: MyProgressDialog
-    private lateinit var fbLoginButton: LoginButton
-    private lateinit var callbackManager: CallbackManager
+//    private lateinit var fbLoginButton: LoginButton
+//    private lateinit var callbackManager: CallbackManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -59,7 +53,7 @@ class RegisterActivity : BaseActivity() {
         edtPassword = findViewById(R.id.edtPassword)
         edtConfirmPassword = findViewById(R.id.edtConfirmPassword)
         edtContactNo = findViewById(R.id.edtContactNo)
-        fbLoginButton = findViewById(R.id.fbloginButton)
+//        fbLoginButton = findViewById(R.id.fbloginButton)
 
         pd = MyProgressDialog(this, R.drawable.icons8_loader)
         rlLoginSignUp.setOnClickListener {
@@ -73,26 +67,6 @@ class RegisterActivity : BaseActivity() {
             }
         }
 
-        fbLoginButton.setOnClickListener {
-            callbackManager = CallbackManager.Factory.create()
-
-            fbLoginButton.registerCallback(callbackManager,object :FacebookCallback<LoginResult?> {
-                override fun onCancel() {
-                    Log.v("@@@", "cancled: ")
-
-                }
-
-                override fun onError(error: FacebookException) {
-                    Log.d("@@@", "Facebook token: onError " + error.message)
-                }
-
-                override fun onSuccess(result: LoginResult?) {
-                    Log.d("@@@", "Facebook token: " + result!!.accessToken.token)
-
-                }
-
-            })
-        }
 
     }
 
@@ -180,7 +154,7 @@ class RegisterActivity : BaseActivity() {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+//        callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data)
     }
 
