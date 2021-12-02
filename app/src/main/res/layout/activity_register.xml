@@ -139,6 +139,7 @@
                 android:textStyle="bold" />
 
             <LinearLayout
+                android:id="@+id/lnr_google_signin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"

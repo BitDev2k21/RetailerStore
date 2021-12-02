@@ -48,7 +48,7 @@
                     android:textStyle="normal"
                     tools:text="Company Name" />
 
-                <com.toyourstore.ui.CustomEditText
+                <com.retailer.ui.CustomEditText
                     android:id="@+id/edtSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
