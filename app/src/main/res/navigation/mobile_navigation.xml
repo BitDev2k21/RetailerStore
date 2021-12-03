@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.toyourstore.ui.ui.home.HomeFragment"
+        android:name="com.retailer.ui.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -20,126 +20,126 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.toyourstore.ui.ui.gallery.GalleryFragment"
+        android:name="com.retailer.ui.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.toyourstore.ui.ui.slideshow.SlideshowFragment"
+        android:name="com.retailer.ui.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
     <fragment
         android:id="@+id/shopAddUpdateFragment"
-        android:name="com.toyourstore.ui.fragment.ShopAddUpdateFragment"
+        android:name="com.retailer.ui.fragment.ShopAddUpdateFragment"
         android:label="fragment_shop_details"
         tools:layout="@layout/fragment_add_update_shop" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.toyourstore.ui.fragment.SearchFragment"
+        android:name="com.retailer.ui.fragment.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/searchResultFragment"
-        android:name="com.toyourstore.ui.fragment.SearchResultFragment"
+        android:name="com.retailer.ui.fragment.SearchResultFragment"
         android:label="SearchResultFragment" />
     <fragment
         android:id="@+id/nav_product_details"
-        android:name="com.toyourstore.ui.fragment.ProductDetailsFragment"
+        android:name="com.retailer.ui.fragment.ProductDetailsFragment"
         android:label="fragment_product_details"
         tools:layout="@layout/fragment_product_details" />
     <fragment
         android:id="@+id/orderListFragment"
-        android:name="com.toyourstore.ui.fragment.PendingOrderListFragment"
+        android:name="com.retailer.ui.fragment.PendingOrderListFragment"
         android:label="OrderListFragment" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.toyourstore.ui.fragment.ProfileFragment"
+        android:name="com.retailer.ui.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/orderDetailsFragment"
-        android:name="com.toyourstore.ui.fragment.OrderDetailsFragment"
+        android:name="com.retailer.ui.fragment.OrderDetailsFragment"
         android:label="fragment_order_details"
         tools:layout="@layout/fragment_order_details" />
     <fragment
         android:id="@+id/associatedShopsFragment"
-        android:name="com.toyourstore.ui.fragment.AssociatedShopsFragment"
+        android:name="com.retailer.ui.fragment.AssociatedShopsFragment"
         android:label="fragment_associate_shop"
         tools:layout="@layout/fragment_associate_shop" />
     <fragment
         android:id="@+id/associatedCompaniesFragment"
-        android:name="com.toyourstore.ui.fragment.AssociatedCompaniesFragment"
+        android:name="com.retailer.ui.fragment.AssociatedCompaniesFragment"
         android:label="fragment_agency_associate_company"
         tools:layout="@layout/fragment_agency_associate_company" />
     <fragment
         android:id="@+id/agencyDetailsFragment"
-        android:name="com.toyourstore.ui.fragment.AgencyDetailsFragment"
+        android:name="com.retailer.ui.fragment.AgencyDetailsFragment"
         android:label="fragment_agency_details"
         tools:layout="@layout/fragment_agency_details" />
     <fragment
         android:id="@+id/inventoryFragment"
-        android:name="com.toyourstore.ui.fragment.InventoryFragment"
+        android:name="com.retailer.ui.fragment.InventoryFragment"
         android:label="fragment_inverntroy"
         tools:layout="@layout/fragment_inverntroy" />
     <fragment
         android:id="@+id/registerDistributorProcessFragment"
-        android:name="com.toyourstore.ui.fragment.RegisterDistributorProcessFragment"
+        android:name="com.retailer.ui.fragment.RegisterDistributorProcessFragment"
         android:label="fragment_register_distributor"
         tools:layout="@layout/fragment_register_distributor" />
     <fragment
         android:id="@+id/reviewFragment"
-        android:name="com.toyourstore.ui.fragment.ReviewFragment"
+        android:name="com.retailer.ui.fragment.ReviewFragment"
         android:label="fragment_review"
         tools:layout="@layout/fragment_review" />
     <fragment
         android:id="@+id/registerDistributorComplete"
-        android:name="com.toyourstore.ui.fragment.RegisterDistributorComplete"
+        android:name="com.retailer.ui.fragment.RegisterDistributorComplete"
         android:label="fragment_register_distributor_complete"
         tools:layout="@layout/fragment_register_distributor_complete" />
     <fragment
         android:id="@+id/pendingPaymentListFragment"
-        android:name="com.toyourstore.ui.fragment.PendingPaymentListFragment"
+        android:name="com.retailer.ui.fragment.PendingPaymentListFragment"
         android:label="fragment_payment_list"
         tools:layout="@layout/fragment_payment_list" />
     <fragment
         android:id="@+id/shopFragment"
-        android:name="com.toyourstore.ui.fragment.ShopsFragment"
+        android:name="com.retailer.ui.fragment.ShopsFragment"
         android:label="fragment_sales"
         tools:layout="@layout/fragment_sales" />
     <fragment
         android:id="@+id/addSaleFragment"
-        android:name="com.toyourstore.ui.fragment.ShoapListFragment"
+        android:name="com.retailer.ui.fragment.ShoapListFragment"
         android:label="fragment_add_sale"
         tools:layout="@layout/fragment_shoap_list" />
     <fragment
         android:id="@+id/operatorFragment"
-        android:name="com.toyourstore.ui.fragment.OperatorFragment"
+        android:name="com.retailer.ui.fragment.OperatorFragment"
         android:label="fragment_operator"
         tools:layout="@layout/fragment_operator" />
     <fragment
         android:id="@+id/pastOrderFragment"
-        android:name="com.toyourstore.ui.fragment.PastOrderFragment"
+        android:name="com.retailer.ui.fragment.PastOrderFragment"
         android:label="fragment_past_order"
         tools:layout="@layout/fragment_past_order" />
     <fragment
         android:id="@+id/specialOfferFragment"
-        android:name="com.toyourstore.ui.fragment.SpecialOfferFragment"
+        android:name="com.retailer.ui.fragment.SpecialOfferFragment"
         android:label="fragment_special_offer"
         tools:layout="@layout/fragment_special_offer" />
     <fragment
         android:id="@+id/itemInCartFragment"
-        android:name="com.toyourstore.ui.fragment.ItemInCartFragment"
+        android:name="com.retailer.ui.fragment.ItemInCartFragment"
         android:label="fragment_item_cart"
         tools:layout="@layout/fragment_item_cart" />
     <fragment
         android:id="@+id/browseFragment"
-        android:name="com.toyourstore.ui.fragment.BrowseFragment"
+        android:name="com.retailer.ui.fragment.BrowseFragment"
         android:label="fragment_browse"
         tools:layout="@layout/fragment_browse" />
     <fragment
         android:id="@+id/shopAddUpdateFragmentFirstTime"
-        android:name="com.toyourstore.ui.fragment.ShopAddUpdateFragmentFirstTime"
+        android:name="com.retailer.ui.fragment.ShopAddUpdateFragmentFirstTime"
         android:label="fragment_add_update_shop_firts"
         tools:layout="@layout/fragment_add_update_shop_firts" />
 
