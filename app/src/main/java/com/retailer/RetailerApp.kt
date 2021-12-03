@@ -2,6 +2,8 @@ package com.retailer
 
 import android.app.Application
 import android.util.Log
+import com.facebook.FacebookSdk
+import com.facebook.appevents.AppEventsLogger
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 
@@ -24,5 +26,8 @@ class RetailerApp : Application() {
             val msg = ""
             Log.v("@@@","FirebaseMessaging token : $token" )
         })
+
+        FacebookSdk.sdkInitialize(this)
+        AppEventsLogger.activateApp(this);
     }
 }

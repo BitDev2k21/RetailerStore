@@ -44,6 +44,7 @@
 
 
             <LinearLayout
+                android:id="@+id/lnt_facebook_lgoing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -62,10 +63,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/opensans_regular"
-                    android:text="Continue with Google"
+                    android:text="Continue with Facebook"
                     android:textColor="#757575"
                     android:textSize="14sp"
                     android:textStyle="bold" />
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/login_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp" />
             </LinearLayout>
 
 
