@@ -16,6 +16,9 @@ class DashBoardRetailer {
         @SerializedName("pending_orders")
         @Expose
          var pendingOrders: Int? = null
+        @SerializedName("pending_payments")
+        @Expose
+        var pending_payments: Int? = null
       }
 
 }

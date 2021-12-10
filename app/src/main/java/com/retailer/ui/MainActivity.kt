@@ -25,6 +25,7 @@ import com.retailer.model.CityResponse
 import com.retailer.model.products.Company
 import com.retailer.model.products.Products
 import com.retailer.preference.SessionData
+import com.retailer.utils.MyProgressDialog
 import com.retailer.utils.PopupUtils
 import de.footprinttech.wms.db.DataBaseHelper
 import kotlinx.android.synthetic.main.content_main.*
@@ -69,6 +70,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var imgSearchText: ImageView
     var TAG = "@@@MainActivity"
     lateinit var companyList : List<Company>
+    private lateinit var pd: MyProgressDialog
     override fun onResume() {
         super.onResume()
         lifecycleScope.launch(Dispatchers.IO) {
@@ -110,7 +112,7 @@ class MainActivity : AppCompatActivity() {
         imgSearchText = findViewById(R.id.imgSearchText)
         txtHome.isSelected = true
         navController = findNavController(R.id.nav_host_fragment)
-
+        pd = MyProgressDialog(this, R.drawable.icons8_loader)
         imgMenu.setOnClickListener {
             drawerLayout.openDrawer(Gravity.LEFT)
         }
@@ -200,12 +202,72 @@ class MainActivity : AppCompatActivity() {
 //        if (!SessionData.getInstance(this).isRegisterDis()) {
 //            navController.navigate(R.id.registerDistributorProcessFragment)
 //        }
+        if(!SessionData.getInstance(this@MainActivity).isRegisterDis()){
+            checkIfShopUpdated()
+        }
+
+//        txtWorkForce.setOnClickListener {
+//
+//        }
+    }
 
 
-        txtWorkForce.setOnClickListener {
-
+    private fun checkIfShopUpdated() {
+        pd.show()
+        lifecycleScope.launch(Dispatchers.IO) {
+            val apiCallingRequest = ApiCallingRequest()
+            val apiToken = SessionData.getInstance(this@MainActivity).getToken()
+            val userId = SessionData.getInstance(this@MainActivity).getUserId()
+            val params = HashMap<String, String>()
+            params["user_id"] = userId?:""
+            params["api_token"] = apiToken?:""
+            try {
+                val responseOfLogin =
+                    apiCallingRequest.apiCallingForGetUser(
+                        params
+                    )
+                Log.v("@@@","checkIfShopUpdated resp ${responseOfLogin.toString()} ")
+                withContext(Dispatchers.Main) {
+                    pd.cancel()
+                    if(responseOfLogin!=null &&  responseOfLogin.user!=null && responseOfLogin.user.size>0 ){
+                        val user = responseOfLogin.user.first()
+                        if(user.distributor_details!=null){
+                            val disDetails = user.distributor_details.first()
+                            val name = disDetails.name
+                            val owner_name = disDetails.owner_name
+                            val contact = disDetails.contact
+                            val working_hours = disDetails.working_hours
+                            val gst_no = disDetails.gst_no
+                            val routes = disDetails.routes
+                            val credit_period = disDetails.credit_period
+                            val address = disDetails.address
+                            val user_id = disDetails.user_id
+                            val state_id = disDetails.state_id
+                            val city_id = disDetails.city_id
+                            val status = disDetails.status
+                            if(
+                                name.isNullOrEmpty() ||owner_name.isNullOrEmpty() ||contact.isNullOrEmpty()||working_hours.isNullOrEmpty()||
+                                gst_no.isNullOrEmpty() ||routes.isNullOrEmpty() ||credit_period.isNullOrEmpty()||address.isNullOrEmpty()||
+                                user_id.isNullOrEmpty() ||state_id.isNullOrEmpty() ||city_id.isNullOrEmpty()||status.isNullOrEmpty()
+                            ){
+                                navController.navigate(R.id.registerDistributorProcessFragment)
+                            }else{
+                                navController.navigate(R.id.registerDistributorComplete)
+                                SessionData.getInstance(this@MainActivity).saveIsRegister(true)
+                                Toast.makeText(this@MainActivity, "Successfully Updated", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                }
+            } catch (apiEx: Exception) {
+                Log.v("@@@","checkIfShopUpdated resp ${apiEx.message.toString()} ")
+                withContext(Dispatchers.Main) {
+                    pd.cancel()
+                }
+            }
         }
     }
+
     fun getForegroundFragment(): Fragment? {
         val navHostFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
         return if (navHostFragment == null) null else navHostFragment.getChildFragmentManager().getFragments().get(0)

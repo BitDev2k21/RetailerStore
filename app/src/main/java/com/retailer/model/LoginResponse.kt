@@ -17,7 +17,5 @@ data class LoginResponse(
     var user: User? = null
 
 
-
-
 )
 

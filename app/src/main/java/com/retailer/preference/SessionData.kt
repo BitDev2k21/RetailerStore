@@ -32,8 +32,17 @@ class SessionData(context: Context) {
         editor.commit()
     }
 
+    fun saveFirebaseToken(status: String) {
+        editor.putString(Constant.FIREBASE_TOKEN, status)
+        editor.commit()
+    }
+
     fun getToken(): String? {
         return prefs.getString(Constant.SAVE_TOKEN, "")
+    }
+
+    fun getFirebaseToken(): String? {
+        return prefs.getString(Constant.FIREBASE_TOKEN, "")
     }
 
     fun saveUserId(status: String) {

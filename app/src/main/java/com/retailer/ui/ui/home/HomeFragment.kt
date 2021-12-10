@@ -123,7 +123,7 @@ class HomeFragment : BaseFragment() {
                         apiCallingForDashBoard()
                     }
                 }
-            } catch (apiEx: IOException) {
+            } catch (apiEx: Exception) {
                 withContext(Dispatchers.Main) {
                     pd.cancel()
                     try {
@@ -157,10 +157,14 @@ class HomeFragment : BaseFragment() {
                 Log.e("response", "" + dashBoardResponse)
                 withContext(Dispatchers.Main) {
                     pd.cancel()
-                    txtPendingOrder.text = "" + dashBoardResponse?.data?.itemsInCart!!
-                    txtPendingPayment.text = "" + dashBoardResponse?.data?.pendingOrders!!
+                    if(dashBoardResponse?.data?.itemsInCart!=null){
+                        txtPendingOrder.text = "" + dashBoardResponse?.data?.itemsInCart!!
+                    }
+                    if(dashBoardResponse?.data?.pendingOrders!=null){
+                        txtPendingPayment.text = "" + dashBoardResponse?.data?.pendingOrders!!
+                    }
                 }
-            } catch (apiEx: IOException) {
+            } catch (apiEx: Exception) {
                 withContext(Dispatchers.Main) {
                     pd.cancel()
                     try {

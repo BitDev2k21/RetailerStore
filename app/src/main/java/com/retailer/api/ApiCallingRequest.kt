@@ -26,6 +26,13 @@ class ApiCallingRequest : com.retailer.api.SafeApiRequest() {
     }
 
 
+    suspend fun apiCallingForGetUser(
+        params: HashMap<String, String>
+    ): UserResponse {
+        return apiRequest { apiService.getUser(params) }
+    }
+
+
     suspend fun apiCallingBusinessLine(
             params: HashMap<String, String>
     ): BusinessLineModelResponse {

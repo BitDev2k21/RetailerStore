@@ -38,6 +38,7 @@ import com.facebook.login.LoginResult
 import com.facebook.FacebookCallback
 import com.facebook.GraphRequest.GraphJSONObjectCallback
 import com.facebook.login.widget.LoginButton
+import kotlinx.android.synthetic.main.activity_register.*
 import java.lang.NullPointerException
 import java.util.*
 
@@ -49,6 +50,7 @@ class LoginActivity : BaseActivity() {
     private lateinit var edtUser: EditText
     private lateinit var edtPassword: EditText
     private lateinit var lnt_facebook_lgoing: LinearLayout
+    private lateinit var lnr_google_signin: LinearLayout
     private lateinit var pd: MyProgressDialog
     private var callbackManager: CallbackManager? = null
     private var  login_button : LoginButton?=null
@@ -150,17 +152,24 @@ class LoginActivity : BaseActivity() {
         edtUser = findViewById(R.id.edtUser)
         edtPassword = findViewById(R.id.edtPassword)
         lnt_facebook_lgoing= findViewById(R.id.lnt_facebook_lgoing)
+        lnr_google_signin= findViewById(R.id.lnr_google_signin)
         pd = MyProgressDialog(this, R.drawable.icons8_loader)
         login_button =  findViewById(R.id.login_button) as LoginButton
         login_button!!.setReadPermissions(Arrays.asList(EMAIL))
         rlLoginSignUp.setOnClickListener {
             if (isValidateData()) {
+                val deviceTokenFB = SessionData.getInstance(applicationContext).getFirebaseToken()?:""
                 apiCallingForLogin(
                     edtUser.text.toString().trim(),
-                    edtPassword.text.toString().trim()
+                    edtPassword.text.toString().trim(),
+                    deviceTokenFB
                 )
 
             }
+        }
+
+        lnr_google_signin.setOnClickListener {
+            GoogleSignIn()
         }
 
         lnt_facebook_lgoing.setOnClickListener {
@@ -193,13 +202,15 @@ class LoginActivity : BaseActivity() {
     }
 
 
-    private fun apiCallingForLogin(email: String, password: String) {
+    private fun apiCallingForLogin(email: String, password: String, tokenFB: String) {
         pd.show()
         lifecycleScope.launch(Dispatchers.IO) {
             val apiCallingRequest = com.retailer.api.ApiCallingRequest()
             val params = HashMap<String, String>()
             params["email"] = email
             params["password"] = password
+            params["social_id"] = ""
+            params["device_token"] = tokenFB
             try {
                 val responseOfLogin =
                     apiCallingRequest.apiCallingForLogin(
@@ -266,15 +277,14 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun GoogleSignIn(){
-
-        if (!isUserSignedIn()){
-
-            val signInIntent = getGoogleSinginClient().signInIntent
-            startActivityForResult(signInIntent, RegisterActivity.RC_SIGN_IN)
-        } else {
-            Toast.makeText(this, " User already signed-in ", Toast.LENGTH_SHORT).show()
-        }
-
+        val signInIntent = getGoogleSinginClient().signInIntent
+        startActivityForResult(signInIntent, RegisterActivity.RC_SIGN_IN)
+//
+//        if (!isUserSignedIn()){
+//
+//        } else {
+//            Toast.makeText(this, " User already signed-in ", Toast.LENGTH_SHORT).show()
+//        }
     }
 
 
@@ -289,7 +299,10 @@ class LoginActivity : BaseActivity() {
             }
         }
     }
-
+    var socialID = ""
+    var deviceToken = ""
+    var socialName = ""
+    var socialemail = ""
     private fun handleSignData(data: Intent?) {
         // The Task returned from this call is always completed, no need to attach
         // a listener.
@@ -301,13 +314,72 @@ class LoginActivity : BaseActivity() {
                     "account ${it.result?.account}".print()
                     "displayName ${it.result?.displayName}".print()
                     "Email ${it.result?.email}".print()
+                    try {
+                        socialID = it.result?.id.toString()
+                        deviceToken = it.result?.idToken.toString()
+                        socialName = it.result?.displayName.toString()
+                        socialemail = it.result?.email.toString()
+                        val deviceTokenFB = SessionData.getInstance(applicationContext).getFirebaseToken()?:""
+                        apiCallingForSocialLogin(socialemail,socialName,socialID,deviceTokenFB)
+                    }catch (ex:Exception){
+                        Log.v(TAG_KOTLIN," Exception ${ex.message}")
+                    }
                 } else {
                     // authentication failed
                     "exception ${it.exception}".print()
                 }
             }
-
     }
+    private fun apiCallingForSocialLogin(email: String, socialName: String,socialID: String, deviceToken: String) {
+        pd.show()
+        lifecycleScope.launch(Dispatchers.IO) {
+            val apiCallingRequest = ApiCallingRequest()
+            val params = HashMap<String, String>()
+            params["email"] = email
+            params["social_id"] = socialID
+            params["device_token"] = deviceToken
+            params["password"] = ""
+            try {
+                val responseOfLogin =
+                    apiCallingRequest.apiCallingForLogin(
+                        params
+                    )
+                val message = responseOfLogin.message
+                withContext(Dispatchers.Main) {
+                    pd.cancel()
+                    if (TextUtils.isEmpty(message)) {
+                        responseOfLogin.token?.let {
+                            SessionData.getInstance(this@LoginActivity).saveToken(it)
+                        }
+                        SessionData.getInstance(this@LoginActivity)
+                            .saveUserId(responseOfLogin.user?.id.toString())
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            responseOfLogin.user?.let {
+                                DataBaseHelper.getDatabaseDao(this@LoginActivity).saveUser(it)
+                            }
+
+                            withContext(Dispatchers.Main) {
+                                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                startActivity(intent);
+                                overridePendingTransition(
+                                    R.anim.slide_in_right,
+                                    R.anim.slide_out_left
+                                )
+                                finish()
+                            }
+                        }
+                    } else {
+                        PopupUtils.alertMessage(this@LoginActivity, message!!)
+                    }
+                }
+            } catch (apiEx: IOException) {
+                withContext(Dispatchers.Main) {
+                    pd.cancel()
+                }
+            }
+        }
+    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        callbackManager.onActivityResult(requestCode, resultCode, data);

@@ -13,6 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.retailer.R
 import com.retailer.api.ApiCallingRequest
+import com.retailer.preference.SessionData
 import com.retailer.utils.MyProgressDialog
 import com.retailer.utils.PopupUtils
 import kotlinx.coroutines.Dispatchers
@@ -60,11 +61,13 @@ class RegisterActivity : BaseActivity() {
         pd = MyProgressDialog(this, R.drawable.icons8_loader)
         rlLoginSignUp.setOnClickListener {
             if (isValidateData()) {
+                val deviceTokenFB = SessionData.getInstance(applicationContext).getFirebaseToken()?:""
                 apiCallingForRegister(
                         edtName.text.toString().trim(),
                         edtEmail.text.toString().trim(),
                         edtPassword.text.toString().trim(),
-                        edtContactNo.text.toString().trim()
+                        edtContactNo.text.toString().trim(),
+                    deviceTokenFB
                 )
             }
         }
@@ -122,7 +125,7 @@ class RegisterActivity : BaseActivity() {
         }
     }
 
-    private fun apiCallingForRegister(name: String, email: String, password: String, phone: String) {
+    private fun apiCallingForRegister(name: String, email: String, password: String, phone: String, tokenFB: String) {
         lifecycleScope.launch(Dispatchers.Main) {
             pd.show()
         }
@@ -134,6 +137,8 @@ class RegisterActivity : BaseActivity() {
             params["password"] = password
             params["user_type"] = "retailer"
             params["contact"] = phone
+            params["social_id"] = ""
+            params["device_token"] = tokenFB
             //contact
             try {
                 val responseOfRegister = apiCallingRequest.apiCallingRegister(params)
@@ -185,18 +190,16 @@ class RegisterActivity : BaseActivity() {
     }
 
     private fun GoogleSignIn(){
-
-        if (!isUserSignedIn()){
-
-            val signInIntent = getGoogleSinginClient().signInIntent
-            startActivityForResult(signInIntent, RC_SIGN_IN)
-        } else {
-            Toast.makeText(this, " User already signed-in ", Toast.LENGTH_SHORT).show()
-        }
+        val signInIntent = getGoogleSinginClient().signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+//        if (!isUserSignedIn()){
+//
+//
+//        } else {
+//            Toast.makeText(this, " User already signed-in ", Toast.LENGTH_SHORT).show()
+//        }
 
     }
-
-
     private fun signout() {
         if (isUserSignedIn()){
             getGoogleSinginClient().signOut().addOnCompleteListener {
@@ -208,7 +211,10 @@ class RegisterActivity : BaseActivity() {
             }
         }
     }
-
+    var socialID = ""
+    var deviceToken = ""
+    var socialName = ""
+    var socialemail = ""
     private fun handleSignData(data: Intent?) {
         // The Task returned from this call is always completed, no need to attach
         // a listener.
@@ -220,6 +226,16 @@ class RegisterActivity : BaseActivity() {
                     "account ${it.result?.account}".print()
                     "displayName ${it.result?.displayName}".print()
                     "Email ${it.result?.email}".print()
+                    try {
+                        socialID = it.result?.id.toString()
+                        deviceToken = it.result?.idToken.toString()
+                        socialName = it.result?.displayName.toString()
+                        socialemail = it.result?.email.toString()
+                        val deviceTokenFB = SessionData.getInstance(applicationContext).getFirebaseToken()?:""
+                        apiCallingForSocialLogin(socialemail,socialName,socialID,deviceTokenFB)
+                    }catch (ex:Exception){
+                        Log.v(LoginActivity.TAG_KOTLIN," Exception ${ex.message}")
+                    }
                 } else {
                     // authentication failed
                     "exception ${it.exception}".print()
@@ -227,6 +243,50 @@ class RegisterActivity : BaseActivity() {
             }
 
     }
+
+    private fun apiCallingForSocialLogin(email: String, socialName: String,socialID: String, deviceToken: String) {
+        pd.show()
+        lifecycleScope.launch(Dispatchers.IO) {
+            val apiCallingRequest = ApiCallingRequest()
+            val params = HashMap<String, String>()
+            params["email"] = email
+            params["user_type"] = "distributor"
+            params["email"] = email
+            params["social_id"] = socialID
+            params["device_token"] = deviceToken
+            params["name"] = socialName
+            params["contact"] = ""
+            //contact
+            try {
+                val responseOfRegister = apiCallingRequest.apiCallingRegister(params)
+                Log.v("@@@"," resp : "+responseOfRegister.message)
+                if(responseOfRegister.user!=null && responseOfRegister.user!!.email!=null){
+                    withContext(Dispatchers.Main) {
+                        pd.cancel()
+                        PopupUtils.alertMessageWithCallBack(this@RegisterActivity, "successful user registration", {
+                            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                            finishAffinity()
+                        })
+                    }
+                }else{
+                    withContext(Dispatchers.Main) {
+                        pd.cancel()
+                        Toast.makeText(this@RegisterActivity,""+responseOfRegister.message,Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+            } catch (apiEx: Exception) {
+                Log.v("@@@"," exception : "+apiEx.message)
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@RegisterActivity,"Something went wrong",Toast.LENGTH_SHORT).show()
+                    pd.cancel()
+                }
+            }
+        }
+    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        callbackManager.onActivityResult(requestCode, resultCode, data);

@@ -6,6 +6,6 @@ object Constant {
     val REGISTRE_DISTRIBUTE ="register_dis"
     val SELECTED_SHOP_ID ="selected_shop_id"
     val SELECTED_SHOP_POS ="selected_shop_pos"
-
+    val FIREBASE_TOKEN ="firebase_token"
 
 }

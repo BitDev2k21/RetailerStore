@@ -24,6 +24,9 @@ interface ApiService {
     @POST("user-login")
     suspend fun login(@FieldMap request: Map<String, String>): Response<LoginResponse>
 
+    @FormUrlEncoded
+    @POST("get-user")
+    suspend fun getUser(@FieldMap request: Map<String, String>): Response<UserResponse>
 
     @Headers(
             value = ["Accept: application/json",

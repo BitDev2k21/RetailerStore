@@ -6,6 +6,7 @@ import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
+import com.retailer.preference.SessionData
 
 class RetailerApp : Application() {
     override fun onCreate() {
@@ -21,7 +22,7 @@ class RetailerApp : Application() {
 
             // Get new FCM registration token
             val token = task.result
-
+            SessionData.getInstance(this).saveFirebaseToken(token)
             // Log and toast
             val msg = ""
             Log.v("@@@","FirebaseMessaging token : $token" )
