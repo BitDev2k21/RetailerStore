@@ -5,8 +5,15 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.util.Patterns
-import android.widget.*
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.facebook.*
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -19,9 +26,8 @@ import com.retailer.utils.PopupUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.IOException
-import java.lang.Exception
-import java.util.HashMap
+import org.json.JSONException
+import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -35,8 +41,8 @@ class RegisterActivity : BaseActivity() {
     private lateinit var edtConfirmPassword: EditText
     private lateinit var edtContactNo: EditText
     private lateinit var pd: MyProgressDialog
-//    private lateinit var fbLoginButton: LoginButton
-//    private lateinit var callbackManager: CallbackManager
+    private var  login_button : LoginButton?=null
+    private var callbackManager: CallbackManager? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -49,24 +55,24 @@ class RegisterActivity : BaseActivity() {
 
     override fun init() {
         rlLoginSignUp = findViewById(R.id.rlLoginSignUp)
-
         edtName = findViewById(R.id.edtName)
         lnr_google_signin= findViewById(R.id.lnr_google_signin)
         edtEmail = findViewById(R.id.edtEmail)
         edtPassword = findViewById(R.id.edtPassword)
         edtConfirmPassword = findViewById(R.id.edtConfirmPassword)
         edtContactNo = findViewById(R.id.edtContactNo)
-//        fbLoginButton = findViewById(R.id.fbloginButton)
+        login_button =  findViewById(R.id.FBRegisterButton) as LoginButton
 
         pd = MyProgressDialog(this, R.drawable.icons8_loader)
+        facebookLogin()
         rlLoginSignUp.setOnClickListener {
             if (isValidateData()) {
                 val deviceTokenFB = SessionData.getInstance(applicationContext).getFirebaseToken()?:""
                 apiCallingForRegister(
-                        edtName.text.toString().trim(),
-                        edtEmail.text.toString().trim(),
-                        edtPassword.text.toString().trim(),
-                        edtContactNo.text.toString().trim(),
+                    edtName.text.toString().trim(),
+                    edtEmail.text.toString().trim(),
+                    edtPassword.text.toString().trim(),
+                    edtContactNo.text.toString().trim(),
                     deviceTokenFB
                 )
             }
@@ -75,11 +81,64 @@ class RegisterActivity : BaseActivity() {
         lnr_google_signin.setOnClickListener {
             GoogleSignIn()
         }
-
-
     }
+    fun facebookLogin() {
+        LoginManager.getInstance().logOut()
+        callbackManager = CallbackManager.Factory.create()
+        // Callback registration
+        login_button!!.setPermissions("email", "public_profile")
+        login_button!!.registerCallback(callbackManager, object : FacebookCallback<LoginResult?> {
+            override fun onSuccess(loginResult: LoginResult?) {
+                // App code
+                if (loginResult != null) {
+                    try {
+                        val request = GraphRequest.newMeRequest(
+                            loginResult.accessToken
+                        ) { `object`, response ->
+                            if (`object` != null) {
+                                try {
+                                    val name = `object`.getString("name")
+                                    val email = `object`.getString("email")
+                                    val fbUserID = `object`.getString("id")
+                                    LoginManager.getInstance().logOut()
+                                    val deviceTokenFB = SessionData.getInstance(applicationContext)
+                                        .getFirebaseToken() ?: ""
+                                    apiCallingForSocialLogin(email, name, fbUserID, deviceTokenFB)
 
-    private fun isValidPassword(password:String):Boolean{
+                                } catch (e: JSONException) {
+                                    e.printStackTrace()
+                                } catch (e: NullPointerException) {
+                                    e.printStackTrace()
+                                }
+                            }
+                        }
+                        val parameters = Bundle()
+                        parameters.putString(
+                            "fields",
+                            "id, name, email, gender, birthday"
+                        )
+                        request.parameters = parameters
+                        request.executeAsync()
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    } catch (e: NullPointerException) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+
+            override fun onCancel() {
+                // App code
+                Log.v("@@@", "----onCancel: ")
+            }
+
+            override fun onError(exception: FacebookException) {
+                // App code
+                Log.v("@@@", "----onError: " + exception.message)
+            }
+        })
+    }
+    private fun isValidPassword(password: String):Boolean{
         val pattern: Pattern
         val matcher: Matcher
         val PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$"
@@ -111,7 +170,10 @@ class RegisterActivity : BaseActivity() {
             return false
         }
         else if (!isValidPassword(password)) {
-            PopupUtils.alertMessage(this, "Password must contain one capital letter on number and one symbol (@,$,%,&,#,) ")
+            PopupUtils.alertMessage(
+                this,
+                "Password must contain one capital letter on number and one symbol (@,$,%,&,#,) "
+            )
             return false
         }
         else if (TextUtils.isEmpty(confirmPassword)) {
@@ -125,7 +187,13 @@ class RegisterActivity : BaseActivity() {
         }
     }
 
-    private fun apiCallingForRegister(name: String, email: String, password: String, phone: String, tokenFB: String) {
+    private fun apiCallingForRegister(
+        name: String,
+        email: String,
+        password: String,
+        phone: String,
+        tokenFB: String
+    ) {
         lifecycleScope.launch(Dispatchers.Main) {
             pd.show()
         }
@@ -144,20 +212,38 @@ class RegisterActivity : BaseActivity() {
                 val responseOfRegister = apiCallingRequest.apiCallingRegister(params)
                 withContext(Dispatchers.Main) {
                     pd.cancel()
-                    PopupUtils.alertMessageWithCallBack(
+                    if(responseOfRegister.code==null){
+                        PopupUtils.alertMessageWithCallBack(
                             this@RegisterActivity,
                             "successful user registration",
                             {
-                                val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                                val intent = Intent(
+                                    this@RegisterActivity,
+                                    LoginActivity::class.java
+                                )
                                 startActivity(intent);
-                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                                overridePendingTransition(
+                                    R.anim.slide_in_right,
+                                    R.anim.slide_out_left
+                                )
                                 finishAffinity()
                             })
+                    }else{
+                        PopupUtils.alertMessageWithCallBack(
+                            this@RegisterActivity,
+                            responseOfRegister.message.toString(),
+                            {
+
+                            })
+                    }
                 }
             } catch (apiEx: ApiException) {
                 withContext(Dispatchers.Main) {
                     pd.cancel()
-                    PopupUtils.alertMessage(this@RegisterActivity, "Something went wrong, Please try again.")
+                    PopupUtils.alertMessage(
+                        this@RegisterActivity,
+                        "Something went wrong, Please try again."
+                    )
                 }
             }
         }
@@ -232,9 +318,9 @@ class RegisterActivity : BaseActivity() {
                         socialName = it.result?.displayName.toString()
                         socialemail = it.result?.email.toString()
                         val deviceTokenFB = SessionData.getInstance(applicationContext).getFirebaseToken()?:""
-                        apiCallingForSocialLogin(socialemail,socialName,socialID,deviceTokenFB)
-                    }catch (ex:Exception){
-                        Log.v(LoginActivity.TAG_KOTLIN," Exception ${ex.message}")
+                        apiCallingForSocialLogin(socialemail, socialName, socialID, deviceTokenFB)
+                    }catch (ex: Exception){
+                        Log.v(LoginActivity.TAG_KOTLIN, " Exception ${ex.message}")
                     }
                 } else {
                     // authentication failed
@@ -244,13 +330,18 @@ class RegisterActivity : BaseActivity() {
 
     }
 
-    private fun apiCallingForSocialLogin(email: String, socialName: String,socialID: String, deviceToken: String) {
+    private fun apiCallingForSocialLogin(
+        email: String,
+        socialName: String,
+        socialID: String,
+        deviceToken: String
+    ) {
         pd.show()
         lifecycleScope.launch(Dispatchers.IO) {
             val apiCallingRequest = ApiCallingRequest()
             val params = HashMap<String, String>()
             params["email"] = email
-            params["user_type"] = "distributor"
+            params["user_type"] = "retailer"
             params["email"] = email
             params["social_id"] = socialID
             params["device_token"] = deviceToken
@@ -259,28 +350,43 @@ class RegisterActivity : BaseActivity() {
             //contact
             try {
                 val responseOfRegister = apiCallingRequest.apiCallingRegister(params)
-                Log.v("@@@"," resp : "+responseOfRegister.message)
+                Log.v("@@@", " resp : " + responseOfRegister.message)
                 if(responseOfRegister.user!=null && responseOfRegister.user!!.email!=null){
                     withContext(Dispatchers.Main) {
                         pd.cancel()
-                        PopupUtils.alertMessageWithCallBack(this@RegisterActivity, "successful user registration", {
-                            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                            startActivity(intent);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                            finishAffinity()
-                        })
+                        PopupUtils.alertMessageWithCallBack(
+                            this@RegisterActivity,
+                            "successful user registration",
+                            {
+                                val intent =
+                                    Intent(this@RegisterActivity, LoginActivity::class.java)
+                                startActivity(intent);
+                                overridePendingTransition(
+                                    R.anim.slide_in_right,
+                                    R.anim.slide_out_left
+                                )
+                                finishAffinity()
+                            })
                     }
                 }else{
                     withContext(Dispatchers.Main) {
                         pd.cancel()
-                        Toast.makeText(this@RegisterActivity,""+responseOfRegister.message,Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@RegisterActivity,
+                            "" + responseOfRegister.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
 
             } catch (apiEx: Exception) {
-                Log.v("@@@"," exception : "+apiEx.message)
+                Log.v("@@@", " exception : " + apiEx.message)
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@RegisterActivity,"Something went wrong",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@RegisterActivity,
+                        "Something went wrong",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     pd.cancel()
                 }
             }
@@ -290,6 +396,11 @@ class RegisterActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        callbackManager.onActivityResult(requestCode, resultCode, data);
+        callbackManager?.onActivityResult(
+            requestCode,
+            resultCode,
+            data
+        )
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
             handleSignData(data)

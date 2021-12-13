@@ -35,8 +35,8 @@ class OrderItemListAdapter : RecyclerView.Adapter<OrderItemListAdapter.OrderItem
         val orderItem = listOfOrderItem?.get(position)
         val no = position + 1
         holder.txtProductName.text = "" + no + ". " + orderItem?.product?.name
-        holder.txtPrice.text = ""+orderItem?.totalPrice
-        holder.txtQnt.text = orderItem?.requestedQty.toString()
+        holder.txtPrice.text = "Price: "+orderItem?.unitPrice
+        holder.txtQnt.text = "Qty: "+ orderItem?.requestedQty.toString()
     }
 
     override fun getItemCount(): Int {

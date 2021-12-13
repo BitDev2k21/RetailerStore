@@ -49,7 +49,7 @@ class PendingOrderListAdapter : RecyclerView.Adapter<PendingOrderListAdapter.Pla
         val searchItem = searchList?.get(position)
         val orderListAdapter = OrderItemListAdapter()
         val order_status = searchItem?.status
-        holder.txtShopName.text = searchItem?.shop?.name
+        holder.txtShopName.text = searchItem?.distributor?.name
         holder.txtOrderNo.text = searchItem?.order_no
         holder.txtTotalPrice.text = "" + searchItem?.total
         holder.txtDate.text = "" + searchItem?.createdAt?.substringBeforeLast(" ")

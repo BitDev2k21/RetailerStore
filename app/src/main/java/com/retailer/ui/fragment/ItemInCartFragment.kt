@@ -27,7 +27,7 @@ class ItemInCartFragment : BaseFragment() {
 
     private var rootView: View? = null
     lateinit var rvItemIncart: RecyclerView
-    var cartItemAdapter = CartItemAdapter()
+     lateinit var cartItemAdapter: CartItemAdapter
     private var listOfData = ArrayList<String>()
     lateinit var txtCheckOut: TextView
     lateinit var txtNoItemFound: TextView
@@ -35,6 +35,7 @@ class ItemInCartFragment : BaseFragment() {
     private var totalItem = ""
     private var carts = ArrayList<Cart>()
     private var cart_total = ""
+    var imagePath :String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +47,7 @@ class ItemInCartFragment : BaseFragment() {
         rvItemIncart = rootView?.findViewById(R.id.rvItemIncart)!!
         txtCheckOut = rootView?.findViewById(R.id.txtCheckOut)!!
         txtNoItemFound = rootView?.findViewById(R.id.txtNoItemFound)!!
+        cartItemAdapter = CartItemAdapter(requireContext())
         rvItemIncart.adapter = cartItemAdapter
         return rootView
     }
@@ -70,7 +72,7 @@ class ItemInCartFragment : BaseFragment() {
                     txtNoItemFound.visibility = View.GONE
                     rvItemIncart.visibility = View.VISIBLE
                     txtCheckOut.visibility = View.VISIBLE
-                    cartItemAdapter.setData(newList,
+                    cartItemAdapter.setData(newList, imagePath,
                         { pos, status, qnt ->
                             val cart = newList.get(pos)
                             if (status.equals("delete")) {
@@ -222,8 +224,10 @@ class ItemInCartFragment : BaseFragment() {
                         totalItem = "" + resposneOfCartList.carts.size
                         carts.clear()
                         carts = resposneOfCartList.carts as ArrayList<Cart>
+                        imagePath = resposneOfCartList.image_path
                         cartItemAdapter.setData(
                             carts,
+                            imagePath,
                             { pos, status, qnt ->
                                 val cart = carts.get(pos)
                                 if (status.equals("delete")) {

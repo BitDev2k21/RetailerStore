@@ -14,7 +14,10 @@ data class LoginResponse(
     var message: String? = null,
     @SerializedName("user")
     @Expose
-    var user: User? = null
+    var user: User? = null,
+    @SerializedName("code")
+    @Expose
+    var code: Int? = null
 
 
 )

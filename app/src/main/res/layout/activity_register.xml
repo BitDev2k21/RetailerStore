@@ -15,8 +15,8 @@
             android:layout_marginTop="50dp"
             android:layout_marginRight="40dp"
             android:layout_marginBottom="100dp"
-            android:paddingBottom="@dimen/_200sdp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/_200sdp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -33,9 +33,9 @@
                 android:drawableStart="@drawable/icon_user"
                 android:drawablePadding="10dp"
                 android:hint="Name"
-                android:singleLine="true"
                 android:inputType="text"
                 android:padding="12dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="#b8b8b8" />
 
@@ -65,9 +65,9 @@
                 android:drawableStart="@drawable/icon_user"
                 android:drawablePadding="10dp"
                 android:hint="phone no"
-                android:singleLine="true"
                 android:inputType="phone"
                 android:padding="12dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="#b8b8b8" />
 
@@ -85,7 +85,8 @@
                 android:padding="12dp"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textColorHint="#b8b8b8" />
+                android:textColorHint="#b8b8b8"
+                />
 
 
             <EditText
@@ -164,42 +165,26 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-<!--            <com.facebook.login.widget.LoginButton-->
-<!--                android:id="@+id/fbloginButton"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center_horizontal"-->
-<!--                android:padding="20dp"-->
-<!--                android:layout_marginTop="40dp"-->
-<!--                android:layout_marginBottom="40dp" />-->
-
             <LinearLayout
-                android:visibility="gone"
+                android:id="@+id/lnt_facebook_lgoing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/bg_view"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="15dp">
 
-
-
-                <ImageView
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/FBRegisterButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_fb" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:fontFamily="@font/opensans_regular"
-                    android:text="Continue with Google"
-                    android:textColor="#757575"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:layout_gravity="center"
+                    android:padding="15dp"
+                    />
             </LinearLayout>
+
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

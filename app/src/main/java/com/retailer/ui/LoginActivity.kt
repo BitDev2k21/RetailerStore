@@ -1,12 +1,23 @@
 package com.retailer.ui
 
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Base64.encode
 import android.util.Log
 import android.util.Patterns
 import android.widget.*
 import androidx.lifecycle.lifecycleScope
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.GraphRequest
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.retailer.R
@@ -18,28 +29,11 @@ import de.footprinttech.wms.db.DataBaseHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.IOException
-import java.lang.Exception
-import com.facebook.login.LoginManager
-
-import com.facebook.CallbackManager
-import com.facebook.FacebookException
-
 import org.json.JSONException
-
-import com.facebook.GraphResponse
-
-import org.json.JSONObject
-
-import com.facebook.GraphRequest
-
-import com.facebook.login.LoginResult
-
-import com.facebook.FacebookCallback
-import com.facebook.GraphRequest.GraphJSONObjectCallback
-import com.facebook.login.widget.LoginButton
-import kotlinx.android.synthetic.main.activity_register.*
-import java.lang.NullPointerException
+import java.io.IOException
+import java.net.URLEncoder.encode
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 import java.util.*
 
 
@@ -68,42 +62,12 @@ class LoginActivity : BaseActivity() {
     fun facebookLogin() {
         callbackManager = CallbackManager.Factory.create()
         // Callback registration
+        login_button!!.setPermissions("email", "public_profile")
         login_button!!.registerCallback(callbackManager, object : FacebookCallback<LoginResult?> {
             override fun onSuccess(loginResult: LoginResult?) {
                 // App code
                 if (loginResult != null) {
                     try {
-                        Log.v("@@@", "----onSuccess: ")
-//                        val name = `object`.getString("name")
-//                        val email = `object`.getString("email")
-//                        val fbUserID = `object`.getString("id")
-
-                        // do action after Facebook login success
-                        // or call your API
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                    } catch (e: NullPointerException) {
-                        e.printStackTrace()
-                    }
-                }
-            }
-
-            override fun onCancel() {
-                // App code
-                Log.v("@@@", "----onCancel: ")
-            }
-
-            override fun onError(exception: FacebookException) {
-                // App code
-                Log.v("@@@", "----onError: "+ exception.message)
-            }
-        })
-
-
-        LoginManager.getInstance().registerCallback(
-                callbackManager,
-                object : FacebookCallback<LoginResult> {
-                    override fun onSuccess(loginResult: LoginResult) {
                         val request = GraphRequest.newMeRequest(
                             loginResult.accessToken
                         ) { `object`, response ->
@@ -112,7 +76,9 @@ class LoginActivity : BaseActivity() {
                                     val name = `object`.getString("name")
                                     val email = `object`.getString("email")
                                     val fbUserID = `object`.getString("id")
-
+                                    val deviceTokenFB = SessionData.getInstance(applicationContext).getFirebaseToken()?:""
+                                    LoginManager.getInstance().logOut()
+                                    apiCallingForSocialLogin(email, name, fbUserID, deviceTokenFB)
                                     // do action after Facebook login success
                                     // or call your API
                                 } catch (e: JSONException) {
@@ -129,20 +95,69 @@ class LoginActivity : BaseActivity() {
                         )
                         request.parameters = parameters
                         request.executeAsync()
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    } catch (e: NullPointerException) {
+                        e.printStackTrace()
                     }
+                }
+            }
 
-                    override fun onCancel() {
-                        Log.v("LoginScreen", "---onCancel")
-                    }
+            override fun onCancel() {
+                // App code
+                Log.v("@@@", "----onCancel: ")
+            }
 
-                    override fun onError(error: FacebookException) {
-                        // here write code when get error
-                        Log.v(
-                            "LoginScreen", "----onError: "
-                                    + error.message
-                        )
-                    }
-                })
+            override fun onError(exception: FacebookException) {
+                // App code
+                Log.v("@@@", "----onError: " + exception.message)
+            }
+        })
+
+
+//        LoginManager.getInstance().registerCallback(
+//                callbackManager,
+//                object : FacebookCallback<LoginResult> {
+//                    override fun onSuccess(loginResult: LoginResult) {
+//                        val request = GraphRequest.newMeRequest(
+//                            loginResult.accessToken
+//                        ) { `object`, response ->
+//                            if (`object` != null) {
+//                                try {
+//                                    val name = `object`.getString("name")
+//                                    val email = `object`.getString("email")
+//                                    val fbUserID = `object`.getString("id")
+//
+//                                    // do action after Facebook login success
+//                                    // or call your API
+//                                } catch (e: JSONException) {
+//                                    e.printStackTrace()
+//                                } catch (e: NullPointerException) {
+//                                    e.printStackTrace()
+//                                }
+//                            }
+//                        }
+//                        val parameters = Bundle()
+//                        parameters.putString(
+//                            "fields",
+//                            "id, name, email, gender, birthday"
+//                        )
+//                        request.parameters = parameters
+//                        request.executeAsync()
+//                    }
+//
+//                    override fun onCancel() {
+//                        Log.v("LoginScreen", "---onCancel")
+//                    }
+//
+//                    override fun onError(error: FacebookException) {
+//                        // here write code when get error
+//                        Log.v(
+//                            "LoginScreen", "----onError: "
+//                                    + error.message
+//                        )
+//                    }
+//                })
     }
 
     private val EMAIL = "email"
@@ -155,7 +170,6 @@ class LoginActivity : BaseActivity() {
         lnr_google_signin= findViewById(R.id.lnr_google_signin)
         pd = MyProgressDialog(this, R.drawable.icons8_loader)
         login_button =  findViewById(R.id.login_button) as LoginButton
-        login_button!!.setReadPermissions(Arrays.asList(EMAIL))
         rlLoginSignUp.setOnClickListener {
             if (isValidateData()) {
                 val deviceTokenFB = SessionData.getInstance(applicationContext).getFirebaseToken()?:""
@@ -167,13 +181,9 @@ class LoginActivity : BaseActivity() {
 
             }
         }
-
+        facebookLogin()
         lnr_google_signin.setOnClickListener {
             GoogleSignIn()
-        }
-
-        lnt_facebook_lgoing.setOnClickListener {
-            facebookLogin()
         }
 
         txtCreate.setOnClickListener {
@@ -253,7 +263,9 @@ class LoginActivity : BaseActivity() {
 
     private fun isUserSignedIn(): Boolean {
 
-        val account = com.google.android.gms.auth.api.signin.GoogleSignIn.getLastSignedInAccount(this)
+        val account = com.google.android.gms.auth.api.signin.GoogleSignIn.getLastSignedInAccount(
+            this
+        )
         return account != null
 
     }
@@ -320,9 +332,9 @@ class LoginActivity : BaseActivity() {
                         socialName = it.result?.displayName.toString()
                         socialemail = it.result?.email.toString()
                         val deviceTokenFB = SessionData.getInstance(applicationContext).getFirebaseToken()?:""
-                        apiCallingForSocialLogin(socialemail,socialName,socialID,deviceTokenFB)
-                    }catch (ex:Exception){
-                        Log.v(TAG_KOTLIN," Exception ${ex.message}")
+                        apiCallingForSocialLogin(socialemail, socialName, socialID, deviceTokenFB)
+                    }catch (ex: Exception){
+                        Log.v(TAG_KOTLIN, " Exception ${ex.message}")
                     }
                 } else {
                     // authentication failed
@@ -330,7 +342,12 @@ class LoginActivity : BaseActivity() {
                 }
             }
     }
-    private fun apiCallingForSocialLogin(email: String, socialName: String,socialID: String, deviceToken: String) {
+    private fun apiCallingForSocialLogin(
+        email: String,
+        socialName: String,
+        socialID: String,
+        deviceToken: String
+    ) {
         pd.show()
         lifecycleScope.launch(Dispatchers.IO) {
             val apiCallingRequest = ApiCallingRequest()
@@ -386,7 +403,8 @@ class LoginActivity : BaseActivity() {
         callbackManager?.onActivityResult(
             requestCode,
             resultCode,
-            data)
+            data
+        )
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
             handleSignData(data)
